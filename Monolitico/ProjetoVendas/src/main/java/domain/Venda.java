@@ -23,19 +23,33 @@ import javax.persistence.Table;
 
 import main.java.dao.Persistente;
 
-
+/**
+ * Representa uma venda no sistema.
+ * <p>
+ * Esta classe é mapeada para a tabela {@code TB_VENDA} no banco de dados e
+ * inclui informações sobre a venda,
+ * como o cliente, produtos, valor total e status da venda.
+ * </p>
+ */
 
 @Entity
 @Table(name = "TB_VENDA")
-public class Venda implements Persistente{
+public class Venda implements Persistente {
 
-    public enum Status{
+    /**
+     * Retorna o status correspondente ao nome fornecido.
+     * 
+     * @param value O nome do status.
+     * @return O {@code Status} correspondente ao nome, ou {@code null} se não
+     *         houver correspondência.
+     */
+    public enum Status {
         INICIADA, CONCLUIDA, CANCELADA;
 
-        public static Status getByName(String value){
+        public static Status getByName(String value) {
             for (Status status : Status.values()) {
-                if(status.name().equals(value)){
-                    return  status;
+                if (status.name().equals(value)) {
+                    return status;
                 }
             }
             return null;
@@ -43,129 +57,116 @@ public class Venda implements Persistente{
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Venda_seq")
-    @SequenceGenerator(name = "Venda_seq",sequenceName = "seq_Venda",initialValue = 1,allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Venda_seq")
+    @SequenceGenerator(name = "Venda_seq", sequenceName = "seq_Venda", initialValue = 1, allocationSize = 1)
     private Long id;
 
-    @Column(name = "CODIGO",nullable = false,unique = true)
+    @Column(name = "CODIGO", nullable = false, unique = true)
     private String codigo;
 
     @ManyToOne
-    @JoinColumn(name = "id_cliente_fk",foreignKey = @ForeignKey(name = "fk_venda_cliente"),referencedColumnName = "id",nullable = false)
+    @JoinColumn(name = "id_cliente_fk", foreignKey = @ForeignKey(name = "fk_venda_cliente"), referencedColumnName = "id", nullable = false)
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "venda",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL)
     private Set<ProdutoQuantidade> produtos;
 
-
-
-    @Column(name = "VALOR_TOTAL",nullable = false)
+    @Column(name = "VALOR_TOTAL", nullable = false)
     private BigDecimal valorTotal;
 
-    @Column(name = "DATA_VENDA",nullable = false)
+    @Column(name = "DATA_VENDA", nullable = false)
     private Instant dataVenda;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "STATUS_VENDA",nullable = false)
+    @Column(name = "STATUS_VENDA", nullable = false)
     private Status status;
 
-    
+    /**
+     * Retorna o cliente associado à venda.
+     * 
+     * @return O cliente associado à venda.
+     */
 
     public Venda() {
         produtos = new HashSet<>();
     }
 
-
-
     public Long getId() {
         return id;
     }
-
-
 
     public void setId(Long id) {
         this.id = id;
     }
 
-
-
     public Cliente getCliente() {
         return cliente;
     }
-
-
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
-
-
     public Set<ProdutoQuantidade> getProdutos() {
         return produtos;
     }
-
-
 
     public void setProdutos(Set<ProdutoQuantidade> produtos) {
         this.produtos = produtos;
     }
 
-
-
     public String getCodigo() {
         return codigo;
     }
-
-
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
-
-
     public BigDecimal getValorTotal() {
         return valorTotal;
     }
-
-
 
     public void setValorTotal(BigDecimal valorTotal) {
         this.valorTotal = valorTotal;
     }
 
-
-
     public Instant getDataVenda() {
         return dataVenda;
     }
-
-
 
     public void setDataVenda(Instant dataVenda) {
         this.dataVenda = dataVenda;
     }
 
-
-
     public Status getStatus() {
         return status;
     }
-
-
 
     public void setStatus(Status status) {
         this.status = status;
     }
 
-    public void adicionarProduto(Produto produto, Integer quantidade){
+    /**
+     * Adiciona um produto à venda com a quantidade especificada.
+     * <p>
+     * Se o produto já estiver presente, a quantidade será atualizada. Caso
+     * contrário, o produto será
+     * adicionado à venda.
+     * </p>
+     * 
+     * @param produto    O produto a ser adicionado.
+     * @param quantidade A quantidade do produto a ser adicionada.
+     */
+
+    public void adicionarProduto(Produto produto, Integer quantidade) {
         validarStatus();
-        Optional<ProdutoQuantidade> op = produtos.stream().filter(filter -> filter.getProduto().getCodigo().equals(produto.getCodigo())).findAny();
+        Optional<ProdutoQuantidade> op = produtos.stream()
+                .filter(filter -> filter.getProduto().getCodigo().equals(produto.getCodigo())).findAny();
         if (op.isPresent()) {
             ProdutoQuantidade produtoqtd = op.get();
             produtoqtd.adicionar(quantidade);
-        }else{
+        } else {
             ProdutoQuantidade prod = new ProdutoQuantidade();
             prod.setVenda(this);
             prod.setProduto(produto);
@@ -175,30 +176,43 @@ public class Venda implements Persistente{
         recalcularValorTotalVenda();
     }
 
-    public void removerProduto(Produto produto, Integer quantidade){
+    /**
+     * Remove um produto da venda com a quantidade especificada.
+     * <p>
+     * Se a quantidade a ser removida for menor que a quantidade total, a quantidade
+     * será reduzida.
+     * Caso contrário, o produto será removido da venda.
+     * </p>
+     * 
+     * @param produto    O produto a ser removido.
+     * @param quantidade A quantidade do produto a ser removida.
+     */
+
+    public void removerProduto(Produto produto, Integer quantidade) {
         validarStatus();
-        Optional<ProdutoQuantidade> op = produtos.stream().filter(filter -> filter.getProduto().getCodigo().equals(produto.getCodigo())).findAny();
+        Optional<ProdutoQuantidade> op = produtos.stream()
+                .filter(filter -> filter.getProduto().getCodigo().equals(produto.getCodigo())).findAny();
         if (op.isPresent()) {
             ProdutoQuantidade prodQtd = op.get();
             if (prodQtd.getQuantidade() > quantidade) {
                 prodQtd.remover(quantidade);
                 recalcularValorTotalVenda();
-            } else{
+            } else {
                 produtos.remove(op.get());
                 recalcularValorTotalVenda();
             }
         }
     }
 
-    public void removerTodosProdutos(){
+    public void removerTodosProdutos() {
         validarStatus();
         produtos.clear();
         valorTotal = BigDecimal.ZERO;
     }
 
-    public Integer getQuantidadeTotalProdutos(){
+    public Integer getQuantidadeTotalProdutos() {
         int result = produtos.stream()
-        .reduce(0,(partialCountResult,prod) -> partialCountResult + prod.getQuantidade(),Integer::sum);
+                .reduce(0, (partialCountResult, prod) -> partialCountResult + prod.getQuantidade(), Integer::sum);
         return result;
     }
 
@@ -212,7 +226,13 @@ public class Venda implements Persistente{
         this.valorTotal = valorTotal;
     }
 
-
+    /**
+     * Valida o status da venda antes de permitir alterações.
+     * <p>
+     * Se a venda estiver concluída, uma exceção
+     * {@link UnsupportedOperationException} será lançada.
+     * </p>
+     */
 
     private void validarStatus() {
         if (this.status == Status.CONCLUIDA) {

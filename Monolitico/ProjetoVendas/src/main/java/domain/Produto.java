@@ -12,6 +12,14 @@ import javax.persistence.Table;
 
 import main.java.dao.Persistente;
 
+ /**
+ * Representa um produto no sistema.
+ * <p>
+ * Esta classe é mapeada para a tabela {@code TB_PRODUTO} no banco de dados e inclui informações
+ * sobre o produto, como código, nome, descrição e valor.
+ * </p>
+ */
+
 @Entity
 @Table(name = "TB_PRODUTO")
 public class Produto implements Persistente{

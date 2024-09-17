@@ -12,6 +12,13 @@ import main.java.domain.Venda;
 import main.java.exceptions.DAOException;
 import main.java.exceptions.TipoChaveNaoEncontradaException;
 
+/**
+ * Implementação da interface {@link IVendaDAO} para operações de acesso a dados específicas para a entidade {@link Venda}.
+ * <p>
+ * Esta classe estende {@link GenericDAO} com a entidade {@code Venda} e o tipo de identificador {@code Long}.
+ * Fornece implementações específicas para operações de CRUD e outras operações relacionadas a {@code Venda}.
+ * </p>
+ */
 public class VendaDAO extends GenericDAO<Venda,Long> implements IVendaDAO{
 
     public VendaDAO(){
@@ -34,6 +41,18 @@ public class VendaDAO extends GenericDAO<Venda,Long> implements IVendaDAO{
         throw new UnsupportedOperationException("OPERAÇÂO NÂO PERMITIDA");
     }
 
+     /**
+     * Metodo específico para cadastra uma nova venda no banco de dados.
+     * <p>
+     * Este método salva a venda, incluindo a associação com produtos e o cliente, e gerencia a transação.
+     * </p>
+     * 
+     * @param entity A venda a ser cadastrada.
+     * @return A venda cadastrada com o identificador atribuído.
+     * @throws TipoChaveNaoEncontradaException Se ocorrer um erro relacionado ao tipo de chave.
+     * @throws DAOException Se ocorrer um erro ao salvar a venda.
+     */
+
     @Override
     public Venda cadastrar(Venda entity) throws TipoChaveNaoEncontradaException, DAOException {
         try {
@@ -52,6 +71,13 @@ public class VendaDAO extends GenericDAO<Venda,Long> implements IVendaDAO{
             throw new DAOException("Erro SALVANDO VENDA", null);
         }
     }
+
+    /**
+     * Consulta uma venda com suas associações (cliente e produtos) carregadas.
+     * 
+     * @param id O identificador da venda a ser consultada.
+     * @return A venda com as associações carregadas.
+     */
 
     @Override
     public Venda consultarComCollection(Long id) {

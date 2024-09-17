@@ -14,6 +14,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+/**
+ * Representa a quantidade de um produto em uma venda.
+ * <p>
+ * Esta classe é mapeada para a tabela {@code TB_PRODUTO_QUANTIDADE} no banco de dados e inclui
+ * informações sobre o produto, a quantidade e o valor total associado a essa quantidade na venda.
+ * </p>
+ */
 
 @Entity
 @Table(name = "TB_PRODUTO_QUANTIDADE")
@@ -37,6 +44,10 @@ public class ProdutoQuantidade{
     @JoinColumn(name = "id_venda_fk",foreignKey = @ForeignKey(name = "fk_prod_qtd_venda"),referencedColumnName = "id",nullable = false)
     private Venda venda;
 
+
+     /**
+     * Construtor padrão que inicializa a quantidade e o valor total com valores padrão.
+     */
     public ProdutoQuantidade() {
         this.quantidade = 0;
         this.valorTOTAL = BigDecimal.ZERO;
@@ -82,12 +93,29 @@ public class ProdutoQuantidade{
         this.venda = venda;
     }
 
+       /**
+     * Adiciona a quantidade especificada ao produto e atualiza o valor total.
+     * <p>
+     * O valor total é recalculado com base na nova quantidade.
+     * </p>
+     * 
+     * @param quantidade A quantidade a ser adicionada.
+     */
     public void adicionar(Integer quantidade){
         this.quantidade += quantidade;
         BigDecimal novoValor = this.produto.getValor().multiply(BigDecimal.valueOf(quantidade));
         BigDecimal novoTotal = this.valorTOTAL.add(novoValor);
         this.valorTOTAL = novoTotal;
     }
+
+       /**
+     * Remove a quantidade especificada do produto e atualiza o valor total.
+     * <p>
+     * O valor total é recalculado com base na quantidade removida.
+     * </p>
+     * 
+     * @param quantidade A quantidade a ser removida.
+     */
 
     public void remover(Integer quantidade){
         this.quantidade -= quantidade;

@@ -10,6 +10,14 @@ import javax.persistence.Table;
 
 import main.java.dao.Persistente;
 
+/**
+ * Representa um cliente no sistema.
+ * <p>
+ * Esta classe é mapeada para a tabela {@code TB_CLIENTE} no banco de dados e inclui
+ * informações sobre o cliente, como nome, CPF, telefone, endereço, número, cidade e estado.
+ * </p>
+ */
+
 @Entity
 @Table(name = "TB_CLIENTE")
 public class Cliente implements Persistente{
