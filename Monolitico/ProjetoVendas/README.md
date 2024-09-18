@@ -1,18 +1,15 @@
-## Getting Started
+Resumo do Projeto: Sistema de Vendas
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Desenvolvi um sistema de vendas em Java, utilizando JPA e Hibernate para a persistência de dados. O projeto é estruturado para gerenciar transações de venda, proporcionando uma interface eficiente para os usuários.
 
-## Folder Structure
+Tecnologias e Bibliotecas Utilizadas:
 
-The workspace contains two folders by default, where:
+JPA (Java Persistence API): Para a manipulação de dados e interação com o banco de dados.
+Hibernate: Framework de implementação da JPA, facilitando a persistência e a recuperação de dados.
+JUnit: Utilizado para a criação de testes automatizados, garantindo a qualidade e a funcionalidade do código.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+Dependências Principais:
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+MySQL Connector/J: Para conexão com o banco de dados MySQL.
+PostgreSQL JDBC Driver: Para suporte a bancos de dados PostgreSQL.
+JBoss Logging: Para gerenciamento de logs.
