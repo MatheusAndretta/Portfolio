@@ -2,7 +2,6 @@ Resumo do Projeto: Sistema de Vendas
 Este projeto consiste em um sistema de vendas baseado em microserviços, implementando os seguintes serviços:
 
 ClienteService
-
 Descrição: Gerencia informações dos clientes.
 Tecnologias:
 Spring Boot com MongoDB para persistência.
@@ -10,19 +9,19 @@ Validação de dados com spring-boot-starter-validation.
 API REST com spring-boot-starter-web.
 Documentação com SpringDoc OpenAPI.
 Comunicação entre serviços usando OpenFeign.
-ProdutoService
 
+ProdutoService
 Descrição: Gerencia o cadastro e a consulta de produtos.
 Tecnologias:
 Similar ao ClienteService, com MongoDB como banco de dados.
 Inclui validação, documentação e comunicação entre microserviços via OpenFeign.
-VendaService
 
+VendaService
 Descrição: Responsável pelo processamento de vendas.
 Tecnologias:
 Utiliza as mesmas bibliotecas que os serviços anteriores, garantindo consistência na comunicação e persistência.
-ConfigServer
 
+ConfigServer
 Descrição: Serviço de configuração centralizado.
 Tecnologias:
 Implementa Spring Cloud Config Server para gerenciar configurações de todos os microserviços.
