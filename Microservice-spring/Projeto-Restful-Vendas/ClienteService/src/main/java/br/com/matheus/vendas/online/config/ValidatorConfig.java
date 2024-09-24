@@ -1,7 +1,4 @@
-
-package br.com.matheus.vendas.onlineconfig;
-
-
+package br.com.matheus.vendas.online.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

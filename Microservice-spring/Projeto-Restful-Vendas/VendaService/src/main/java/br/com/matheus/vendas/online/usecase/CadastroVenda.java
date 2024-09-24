@@ -74,9 +74,9 @@ public class CadastroVenda {
 
   private Venda convertToDomain(@Valid VendaDTO vendaDTO, Status status) {
     return Venda.builder()
-        .clienteId(vendaDTO.getClienteId())
-        .codigo(vendaDTO.getCodigo())
-        .dataVenda(vendaDTO.getDataVenda())
+        .clienteId(vendaDTO.clienteId())
+        .codigo(vendaDTO.codigo())
+        .dataVenda(vendaDTO.dataVenda())
         .status(status)
         .valorTotal(BigDecimal.ZERO)
         .produtos(new HashSet<>())

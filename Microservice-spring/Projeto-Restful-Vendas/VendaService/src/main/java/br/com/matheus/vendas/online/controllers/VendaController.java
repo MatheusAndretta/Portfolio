@@ -1,4 +1,4 @@
-package br.com.matheus.vendas.online.resources;
+package br.com.matheus.vendas.online.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,14 +26,14 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/venda")
-public class VendasResources {
+public class VendaController {
 
     private BuscarVenda buscarVenda;
 
     private CadastroVenda cadastroVenda;
 
     @Autowired
-    public VendasResources(BuscarVenda buscarVenda, CadastroVenda cadastroVenda) {
+    public VendaController(BuscarVenda buscarVenda, CadastroVenda cadastroVenda) {
         this.buscarVenda = buscarVenda;
         this.cadastroVenda = cadastroVenda;
     }
@@ -57,9 +57,9 @@ public class VendasResources {
 
     @PutMapping
     @Operation(summary = "Atualizar uma venda")
-    public ResponseEntity<Venda> atualizar(@RequestBody @Valid Venda venda){
-        return ResponseEntity.ok(cadastroVenda.atualizar(venda));
-
+    public ResponseEntity<Venda> atualizar(@RequestBody @Valid Venda venda) {
+          return  ResponseEntity.ok(cadastroVenda.atualizar(venda));
+        
     }
 
 
@@ -85,7 +85,9 @@ public class VendasResources {
     @PutMapping(value = "/{id}/finalizar")
     @Operation(summary = "Finalizar um venda pelo seu ID")
     public ResponseEntity<Venda> finalizar(@PathVariable(value = "id",required = true) String id){
-        return ResponseEntity.ok(cadastroVenda.finalizar(id));
+            return ResponseEntity.ok(cadastroVenda.finalizar(id));
+       
+        
     }
 
     @PutMapping(value = "/{id}/cancelar")

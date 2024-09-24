@@ -41,6 +41,16 @@
             "projectName": "VendaService",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-LoginServiceApplication<LoginService>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "br.com.matheus.vendas.online.LoginServiceApplication",
+            "projectName": "LoginService",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

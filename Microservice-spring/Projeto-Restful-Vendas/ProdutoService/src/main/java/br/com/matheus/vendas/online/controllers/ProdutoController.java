@@ -1,4 +1,4 @@
-package br.com.matheus.vendas.online.controller;
+package br.com.matheus.vendas.online.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,7 +22,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/produto")
-public class ProdutoResource {
+public class ProdutoController {
 
 
     private BuscaProduto buscaProduto;
@@ -30,7 +30,7 @@ public class ProdutoResource {
     private CadastroProduto cadastroProduto;
 
     @Autowired
-    public ProdutoResource(BuscaProduto buscaProduto, CadastroProduto cadastroProduto) {
+    public ProdutoController(BuscaProduto buscaProduto, CadastroProduto cadastroProduto) {
         this.buscaProduto = buscaProduto;
         this.cadastroProduto = cadastroProduto;
     }

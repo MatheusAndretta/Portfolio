@@ -10,7 +10,8 @@ public class EntityNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = -5576150444545521612L;
 
-	public EntityNotFoundException(Class clazz, String... searchParamsMap) {
+	@SuppressWarnings("rawtypes")
+    public EntityNotFoundException(Class clazz, String... searchParamsMap) {
         super(EntityNotFoundException.generateMessage(clazz.getSimpleName(), toMap(String.class, String.class, searchParamsMap)));
     }
 

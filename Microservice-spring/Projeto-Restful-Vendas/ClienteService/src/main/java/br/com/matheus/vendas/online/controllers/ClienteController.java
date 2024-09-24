@@ -1,4 +1,4 @@
-package br.com.matheus.vendas.online.reources;
+package br.com.matheus.vendas.online.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +21,14 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/cliente")
-public class ClienteResource {
+public class ClienteController {
 
     private BuscarCliente buscarCliente;
 
     private CadastroCliente cadastroCliente;
 
     @Autowired
-    public ClienteResource(BuscarCliente buscarCliente,CadastroCliente cadastroCliente) {
+    public ClienteController(BuscarCliente buscarCliente,CadastroCliente cadastroCliente) {
         this.buscarCliente = buscarCliente;
         this.cadastroCliente = cadastroCliente;
     }

@@ -30,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
 @Slf4j
+@SuppressWarnings("null")
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	/**

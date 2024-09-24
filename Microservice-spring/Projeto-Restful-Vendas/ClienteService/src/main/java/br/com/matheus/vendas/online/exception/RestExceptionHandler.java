@@ -30,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
 @Slf4j
+@SuppressWarnings("null")
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	/**
@@ -44,7 +45,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMissingServletRequestParameter(
             MissingServletRequestParameterException ex, HttpHeaders headers,
-            HttpStatusCode status, WebRequest request) {
+             HttpStatusCode status, WebRequest request) {
         String error = ex.getParameterName() + " parameter is missing";
         ApiError apiError = new ApiError(BAD_REQUEST);
         apiError.setMessage(error);
