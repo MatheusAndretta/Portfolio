@@ -1,0 +1,41 @@
+Resumo do Projeto: Tarefa simples
+Descrição do Projeto de Gerenciamento de Tarefas
+O projeto de Gerenciamento de Tarefas é uma aplicação web construída com Spring Boot que permite aos usuários criar, atualizar, listar e deletar tarefas de maneira simples e eficiente. 
+A aplicação utiliza uma API RESTful, proporcionando uma interface intuitiva para interação com os dados das tarefas.
+
+Funcionalidades Principais:
+Listar Tarefas:
+
+O usuário pode visualizar todas as tarefas existentes no sistema.
+Criar Tarefas:
+
+Permite ao usuário adicionar novas tarefas, especificando detalhes como título e descrição.
+Buscar Tarefa por ID:
+
+Os usuários podem consultar informações específicas de uma tarefa utilizando seu identificador único.
+Atualizar Tarefas:
+
+O usuário pode modificar os dados de uma tarefa existente, garantindo que as informações estejam sempre atualizadas.
+Deletar Tarefas:
+
+Possibilita a remoção de tarefas que não são mais necessárias.
+Listar Tarefas Não Completadas:
+
+O projeto oferece a opção de listar apenas as tarefas que ainda não foram marcadas como concluídas.
+Listar Tarefas Completadas:
+
+O usuário pode visualizar as tarefas que foram completadas.
+Marcar Tarefa como Completada:
+
+Uma funcionalidade que permite ao usuário marcar uma tarefa como concluída, atualizando seu status no sistema.
+
+Tecnologias Utilizadas:
+
+Spring Boot: Framework Java para facilitar o desenvolvimento de aplicações web.
+MongoDB: Banco de dados NoSQL para armazenamento das tarefas.
+Swagger: Para documentação e testes da API.
+
+Objetivo do Projeto:
+O objetivo principal deste projeto é fornecer uma ferramenta eficiente para o gerenciamento de tarefas, ajudando os usuários a organizarem suas atividades de forma prática e acessível. 
+Através de uma interface RESTful, o sistema permite que a gestão das tarefas seja realizada de maneira ágil, seja por meio de um frontend ou de outros serviços que consumam a API.
+
